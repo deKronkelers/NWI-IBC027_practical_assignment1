@@ -53,10 +53,6 @@ public class Mobile implements MobileNode {
 
     @Override
     public String toString() {
-        return new StringBuilder("(")
-                .append(leftChild)
-                .append(rightChild)
-                .append(')')
-                .toString();
+        return "(" + leftChild + rightChild + ')';
     }
 }
