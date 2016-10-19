@@ -5,8 +5,8 @@ package model;
  * @author Constantin Blach // s4329872
  */
 public class Mobile implements MobileNode {
-    private static int calcSplit(String seed) {
-        for (int i = 0, braces = 0; i < seed.length(); i++) {
+    private static int calcSplit(String seed, int start, int end) {
+        for (int i = start, braces = 0; i < end; i++) {
             switch (seed.charAt(i)) {
                 case '(': braces++; break;
                 case ')': braces--; break;
@@ -27,12 +27,13 @@ public class Mobile implements MobileNode {
     }
 
     public Mobile(String seed) {
-        String prunedSeed = seed.substring(1, seed.length() - 1);
-        int split = calcSplit(prunedSeed);
-        String left = prunedSeed.substring(0, split);
-        String right = prunedSeed.substring(split, prunedSeed.length());
-        leftChild = left.length() == 1 ? new MobileLeaf(left.charAt(0)) : new Mobile(left);
-        rightChild = right.length() == 1 ? new MobileLeaf(right.charAt(0)) : new Mobile(right);
+        this(seed, 1, seed.length() - 1);
+    }
+
+    private Mobile(String seed, int start, int end) {
+        int split = calcSplit(seed, start, end);
+        leftChild = split - start == 1 ? new MobileLeaf(seed.charAt(start)) : new Mobile(seed, start + 1, split - 1);
+        rightChild = end - split == 1 ? new MobileLeaf(seed.charAt(split)) : new Mobile(seed, split + 1, end - 1);
     }
 
     public MobileNode getLeftChild() {
