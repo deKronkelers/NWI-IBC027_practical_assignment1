@@ -19,7 +19,7 @@ public class Mobile implements MobileNode {
                 return ++i;
             }
         }
-        return -1;
+        throw new IllegalArgumentException("Invalid seed: Couldn't calculate splitting index.");
     }
 
     private MobileNode leftChild;
