@@ -45,6 +45,7 @@ class MobileTest extends GroovyTestCase {
         for (String testMobile in testMobiles) {
             new Mobile(testMobile)
         }
+        shouldFail { new Mobile("((RR)") }
     }
 
     void testIntegration() {
