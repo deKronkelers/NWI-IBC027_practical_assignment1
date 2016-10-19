@@ -5,6 +5,23 @@ package model;
  * @author Constantin Blach // s4329872
  */
 public class Mobile implements MobileNode {
+    private static int calcSplit(String seed) {
+        if (seed.length() == 2) {
+            return 1;
+        }
+        int braces = 0;
+        for (int i = 0; i < seed.length(); i++) {
+            switch (seed.charAt(i)) {
+                case '(': braces++; break;
+                case ')': braces--; break;
+            }
+            if (braces == 0) {
+                return ++i;
+            }
+        }
+        return -1;
+    }
+
     private MobileNode leftChild;
     private MobileNode rightChild;
 
