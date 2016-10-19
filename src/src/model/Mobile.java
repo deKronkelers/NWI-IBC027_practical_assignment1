@@ -32,17 +32,11 @@ public class Mobile implements MobileNode {
 
     public Mobile(String seed) {
         String prunedSeed = seed.substring(1, seed.length() - 1);
-        if (prunedSeed.length() == 2) {
-            leftChild = new MobileLeaf(prunedSeed.charAt(0));
-            rightChild = new MobileLeaf(prunedSeed.charAt(1));
-        } else {
-            int split = prunedSeed.indexOf('(');
-            String left = prunedSeed.substring(0, split);
-            String right = prunedSeed.substring(split, prunedSeed.length());
-            leftChild = left.length() == 1 ? new MobileLeaf(left.charAt(0)) : new Mobile(left);
-            rightChild = right.length() == 1 ? new MobileLeaf(right.charAt(0)) : new Mobile(right);
-
-        }
+        int split = calcSplit(prunedSeed);
+        String left = prunedSeed.substring(0, split);
+        String right = prunedSeed.substring(split, prunedSeed.length());
+        leftChild = left.length() == 1 ? new MobileLeaf(left.charAt(0)) : new Mobile(left);
+        rightChild = right.length() == 1 ? new MobileLeaf(right.charAt(0)) : new Mobile(right);
     }
 
     public MobileNode getLeftChild() {
