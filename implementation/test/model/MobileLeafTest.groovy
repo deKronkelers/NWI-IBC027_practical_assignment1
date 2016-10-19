@@ -1,7 +1,7 @@
 package model
 
 /**
- * @author hendrik
+ * @author Hendrik Werner // s4549775
  */
 class MobileLeafTest extends GroovyTestCase {
     void testToString() {
