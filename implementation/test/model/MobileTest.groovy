@@ -40,4 +40,10 @@ class MobileTest extends GroovyTestCase {
                 )
         ).toString() == "(B(BR))"
     }
+
+    void testSeedConstructor() {
+        for (String testMobile in testMobiles) {
+            new Mobile(testMobile)
+        }
+    }
 }
