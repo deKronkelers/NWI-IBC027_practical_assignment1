@@ -46,4 +46,10 @@ class MobileTest extends GroovyTestCase {
             new Mobile(testMobile)
         }
     }
+
+    void testIntegration() {
+        for (String testMobile in testMobiles) {
+            assert new Mobile(testMobile).toString() == testMobile
+        }
+    }
 }
