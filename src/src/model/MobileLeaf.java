@@ -21,11 +21,24 @@ public class MobileLeaf implements MobileNode {
 
     @Override
     public String toString() {
-        return color == Color.Black ? "B" : "R";
+        return color.toString();
     }
 
     public enum Color {
-        Black,
-        Red;
+        Black {
+            @Override
+            public String toString() {
+                return "B";
+            }
+        },
+        Red {
+            @Override
+            public String toString() {
+                return "R";
+            }
+        };
+
+        @Override
+        public abstract String toString();
     }
 }
