@@ -14,7 +14,7 @@ class MobileTest extends GroovyTestCase {
             }
         })
         for (File sample in samples) {
-            testMobiles.add(new BufferedReader(new FileReader(sample)).readLine())
+            testMobiles << new BufferedReader(new FileReader(sample)).readLine()
         }
     }
 
