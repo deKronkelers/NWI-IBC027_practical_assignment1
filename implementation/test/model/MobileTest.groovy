@@ -7,8 +7,7 @@ class MobileTest extends GroovyTestCase {
     static final List<String> testMobiles = []
 
     static {
-        File samples_dir = new File("../samples/")
-        File[] samples = samples_dir.listFiles(new FilenameFilter() {
+        File[] samples = new File("../samples/").listFiles(new FilenameFilter() {
             @Override
             boolean accept(File file, String s) {
                 s.endsWith ".in"
