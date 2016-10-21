@@ -1,8 +1,11 @@
 package model
 
+import groovy.transform.CompileStatic
+
 /**
  * @author Hendrik Werner // s4549775
  */
+@CompileStatic
 class MobileTest extends GroovyTestCase {
     static final List<String> testMobiles = []
 

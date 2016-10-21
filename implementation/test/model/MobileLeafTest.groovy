@@ -1,8 +1,11 @@
 package model
 
+import groovy.transform.CompileStatic
+
 /**
  * @author Hendrik Werner // s4549775
  */
+@CompileStatic
 class MobileLeafTest extends GroovyTestCase {
     void testCharConstructor() {
         new MobileLeaf("B" as char)
