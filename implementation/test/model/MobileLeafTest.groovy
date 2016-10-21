@@ -21,9 +21,9 @@ class MobileLeafTest extends GroovyTestCase {
     }
 
     void testIntegration() {
-        assert new MobileLeaf('B' as char).toString() == new MobileLeaf(MobileLeaf.Color.Black).toString();
-        assert new MobileLeaf('b' as char).toString() == new MobileLeaf(MobileLeaf.Color.Black).toString();
-        assert new MobileLeaf('R' as char).toString() == new MobileLeaf(MobileLeaf.Color.Red).toString();
-        assert new MobileLeaf('r' as char).toString() == new MobileLeaf(MobileLeaf.Color.Red).toString();
+        assert new MobileLeaf('B' as char) == new MobileLeaf(MobileLeaf.Color.Black);
+        assert new MobileLeaf('b' as char) == new MobileLeaf(MobileLeaf.Color.Black);
+        assert new MobileLeaf('R' as char) == new MobileLeaf(MobileLeaf.Color.Red);
+        assert new MobileLeaf('r' as char) == new MobileLeaf(MobileLeaf.Color.Red);
     }
 }
