@@ -28,6 +28,13 @@ public class MobileLeaf implements MobileNode {
         return color.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return o != null
+                && getClass() == o.getClass()
+                && color == ((MobileLeaf) o).color;
+    }
+
     public enum Color {
         Black {
             @Override
