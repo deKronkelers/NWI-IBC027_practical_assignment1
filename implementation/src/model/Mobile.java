@@ -6,12 +6,12 @@ package model;
  */
 public class Mobile implements MobileNode {
     private static int calcSplit(String seed, int start, int end) {
-        for (int i = start, braces = 0; i < end; i++) {
+        for (int i = start, depth = 0; i < end; i++) {
             switch (seed.charAt(i)) {
-                case '(': braces++; break;
-                case ')': braces--; break;
+                case '(': depth++; break;
+                case ')': depth--; break;
             }
-            if (braces == 0) {
+            if (depth == 0) {
                 return ++i;
             }
         }
