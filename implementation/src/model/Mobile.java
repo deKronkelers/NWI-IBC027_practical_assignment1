@@ -54,6 +54,6 @@ public class Mobile implements MobileNode {
 
     @Override
     public String toString() {
-        return "(" + leftChild + rightChild + ')';
+        return String.format("(%s%s)", leftChild, rightChild);
     }
 }
