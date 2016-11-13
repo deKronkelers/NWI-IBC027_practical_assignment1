@@ -56,4 +56,9 @@ public class Mobile implements MobileNode {
     public String toString() {
         return String.format("(%s%s)", leftChild, rightChild);
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

@@ -35,6 +35,11 @@ public class MobileLeaf implements MobileNode {
                 && color == ((MobileLeaf) o).color;
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
     public enum Color {
         Black {
             @Override
