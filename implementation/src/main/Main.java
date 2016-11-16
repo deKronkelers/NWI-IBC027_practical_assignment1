@@ -13,8 +13,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Mobile mobile = new Mobile(new Scanner(System.in).nextLine());
-        System.out.print(mobile);
-        SwapCountVisitor scv = new SwapCountVisitor();
-        mobile.accept(scv);
+        ColorCountVisitor ccv = new ColorCountVisitor();
+        mobile.accept(ccv);
+        SwapCountVisitor scv = new SwapCountVisitor(ccv.getRed());
+        try {
+            mobile.accept(scv);
+            System.out.println(scv.getSwaps());
+        } catch (IllegalArgumentException e) {
+            System.out.print(e.getMessage());
+        }
     }
 }
