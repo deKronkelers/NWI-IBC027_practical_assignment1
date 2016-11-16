@@ -8,16 +8,31 @@ import groovy.transform.CompileStatic
 @CompileStatic
 class MobileTest extends GroovyTestCase {
     static final List<String> testMobiles = []
+    static final List<String> mobileSolutions = []
 
-    static {
-        File[] samples = new File("../samples/").listFiles(new FilenameFilter() {
+    private static File[] getFilesEndingIn(String path, String ending) {
+        File[] files = new File(path).listFiles(new FilenameFilter() {
             @Override
             boolean accept(File file, String s) {
-                s.endsWith ".in"
+                s.endsWith ending
             }
         })
-        for (File sample in samples) {
+        Arrays.sort files, new Comparator<File>() {
+            @Override
+            int compare(File file, File t1) {
+                (file.name.substring(0, file.name.lastIndexOf(".")) as int) -
+                        (t1.name.substring(0, t1.name.lastIndexOf(".")) as int)
+            }
+        }
+        files
+    }
+
+    static {
+        for (File sample in getFilesEndingIn("../samples/", ".in")) {
             testMobiles << new BufferedReader(new FileReader(sample)).readLine()
+        }
+        for (File solution in getFilesEndingIn("../samples/", ".out")) {
+            mobileSolutions << new BufferedReader(new FileReader(solution)).readLine()
         }
     }
 
