@@ -1,6 +1,8 @@
 package main;
 
+import model.ColorCountVisitor;
 import model.Mobile;
+import model.SwapCountVisitor;
 
 import java.util.Scanner;
 
@@ -10,8 +12,9 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.print(
-                new Mobile(new Scanner(System.in).nextLine())
-        );
+        Mobile mobile = new Mobile(new Scanner(System.in).nextLine());
+        System.out.print(mobile);
+        SwapCountVisitor scv = new SwapCountVisitor();
+        mobile.accept(scv);
     }
 }
