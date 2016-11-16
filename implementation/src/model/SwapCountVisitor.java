@@ -18,7 +18,12 @@ public class SwapCountVisitor implements Visitor {
 
     @Override
     public void visit(MobileLeaf leaf) {
-
+        if (
+                redLeft == 0 && leaf.getColor() == MobileLeaf.Color.Red
+                || redLeft == 1 && leaf.getColor() == MobileLeaf.Color.Black
+            ) {
+            wrongLeafs++;
+        }
     }
 
     @Override
