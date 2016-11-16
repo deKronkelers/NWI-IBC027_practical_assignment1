@@ -76,4 +76,19 @@ class MobileTest extends GroovyTestCase {
             }
         }
     }
+
+    void testDiscard() {
+        for (int i in 0..testMobiles.size()) {
+            if (mobileSolutions[i] == "discard") {
+                println "Solving Mobile $i"
+                Mobile mobile = new Mobile(testMobiles.get(i));
+                def colorCountVisitor = new ColorCountVisitor();
+                mobile.accept colorCountVisitor
+                def swapCountVisitor = new SwapCountVisitor(colorCountVisitor.red)
+                shouldFail {
+                    mobile.accept swapCountVisitor
+                }
+            }
+        }
+    }
 }
