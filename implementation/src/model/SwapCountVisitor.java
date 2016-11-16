@@ -5,7 +5,7 @@ package model;
  * @author Constantin Blach // s4329872
  */
 public class SwapCountVisitor implements Visitor {
-    private int swaps;
+    private int wrongLeafs;
     private int redLeft;
 
     public SwapCountVisitor(int red) {
@@ -13,7 +13,7 @@ public class SwapCountVisitor implements Visitor {
     }
 
     public int getSwaps() {
-        return swaps;
+        return wrongLeafs / 2;
     }
 
     @Override
