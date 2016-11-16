@@ -65,13 +65,13 @@ class MobileTest extends GroovyTestCase {
 
     void testSwaps() {
         for (int i in 0..testMobiles.size()) {
-            println "Solving Mobile $i"
-            Mobile mobile = new Mobile(testMobiles.get(i));
-            def colorCountVisitor = new ColorCountVisitor();
-            mobile.accept colorCountVisitor
-            def swapCountVisitor = new SwapCountVisitor(colorCountVisitor.red)
-            mobile.accept swapCountVisitor
             if (mobileSolutions.get(i) != "discard") {
+                println "Solving Mobile $i"
+                Mobile mobile = new Mobile(testMobiles.get(i));
+                def colorCountVisitor = new ColorCountVisitor();
+                mobile.accept colorCountVisitor
+                def swapCountVisitor = new SwapCountVisitor(colorCountVisitor.red)
+                mobile.accept swapCountVisitor
                 assert mobileSolutions.get(i) == swapCountVisitor.swaps as String
             }
         }
