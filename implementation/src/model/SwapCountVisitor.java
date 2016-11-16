@@ -6,6 +6,13 @@ package model;
  */
 public class SwapCountVisitor implements Visitor {
     private int swaps;
+    private int redLeft;
+    private int blackLeft;
+
+    public SwapCountVisitor(int red, int black) {
+        redLeft = red;
+        blackLeft = black;
+    }
 
     public int getSwaps() {
         return swaps;
