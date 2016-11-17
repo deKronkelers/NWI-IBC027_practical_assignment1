@@ -5,7 +5,7 @@ package model;
  * @author Constantin Blach // s4329872
  */
 public class SwapCountVisitor implements Visitor {
-    private int wrongLeafs;
+    private int swaps;
     private int redLeft;
 
     public SwapCountVisitor(int red) {
@@ -13,7 +13,7 @@ public class SwapCountVisitor implements Visitor {
     }
 
     public int getSwaps() {
-        return wrongLeafs / 2;
+        return swaps;
     }
 
     @Override
@@ -21,11 +21,8 @@ public class SwapCountVisitor implements Visitor {
         if (redLeft > 1) {
             throw new IllegalArgumentException("discard");
         }
-        if (
-                redLeft == 0 && leaf.getColor() == MobileLeaf.Color.Red
-                || redLeft == 1 && leaf.getColor() == MobileLeaf.Color.Black
-            ) {
-            wrongLeafs++;
+        if (redLeft == 1 && leaf.getColor() == MobileLeaf.Color.Black) {
+            swaps++;
         }
     }
 
@@ -33,35 +30,35 @@ public class SwapCountVisitor implements Visitor {
     public void visit(Mobile mobile) {
         int lessRed = redLeft / 2;
         int moreRed = -Math.floorDiv(-redLeft, 2);
-        int currentWrongLeafs = wrongLeafs;
-        int wrongLeafs1;
-        int wrongLeafs2;
+        int currentSwaps = swaps;
+        int swapsLeft;
+        int swapsRight;
         boolean leftFailed = false;
         try {
             d(
                     mobile.getRightChild(), lessRed,
                     mobile.getLeftChild(), moreRed
             );
-            wrongLeafs1 = wrongLeafs;
+            swapsLeft = swaps;
         } catch (IllegalArgumentException ex) {
             leftFailed = true;
-            wrongLeafs1 = Integer.MAX_VALUE;
+            swapsLeft = Integer.MAX_VALUE;
             // do not abort here, we have to try another split below
         }
-        wrongLeafs = currentWrongLeafs;
+        swaps = currentSwaps;
         try {
             d(
                     mobile.getLeftChild(), lessRed,
                     mobile.getRightChild(), moreRed
             );
-            wrongLeafs2 = wrongLeafs;
+            swapsRight = swaps;
         } catch (IllegalArgumentException ex) {
-            wrongLeafs2 = Integer.MAX_VALUE;
+            swapsRight = Integer.MAX_VALUE;
             if (leftFailed) {
                 throw ex;
             }
         }
-        wrongLeafs = Math.min(wrongLeafs1, wrongLeafs2);
+        swaps = Math.min(swapsLeft, swapsRight);
     }
 
     private void d(
