@@ -35,14 +35,14 @@ public class SwapCountVisitor implements Visitor {
         int swapsRight;
         boolean leftFailed = false;
         if (lessRed == moreRed) {
-            d(
+            recurse(
                     mobile.getRightChild(), lessRed,
                     mobile.getLeftChild(), moreRed
             );
             return;
         }
         try {
-            d(
+            recurse(
                     mobile.getRightChild(), lessRed,
                     mobile.getLeftChild(), moreRed
             );
@@ -54,7 +54,7 @@ public class SwapCountVisitor implements Visitor {
         }
         swaps = currentSwaps;
         try {
-            d(
+            recurse(
                     mobile.getLeftChild(), lessRed,
                     mobile.getRightChild(), moreRed
             );
@@ -68,7 +68,7 @@ public class SwapCountVisitor implements Visitor {
         swaps = Math.min(swapsLeft, swapsRight);
     }
 
-    private void d(
+    private void recurse(
             MobileNode lessRedChild, int lessRed,
             MobileNode moreRedChild, int moreRed
     ) {
