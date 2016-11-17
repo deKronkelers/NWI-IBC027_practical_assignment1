@@ -17,14 +17,11 @@ class MobileTest extends GroovyTestCase {
                 s.endsWith ending
             }
         })
-        Arrays.sort files, new Comparator<File>() {
-            @Override
-            int compare(File file, File t1) {
-                (file.name.substring(0, file.name.lastIndexOf(".")) as int) -
-                        (t1.name.substring(0, t1.name.lastIndexOf(".")) as int)
-            }
+        files.sort { File f1, File f2 ->
+            (f1.name.substring(0, f1.name.lastIndexOf(".")) as int) -
+                    (f2.name.substring(0, f2.name.lastIndexOf(".")) as int)
+
         }
-        files
     }
 
     static {
