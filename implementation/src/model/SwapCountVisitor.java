@@ -31,42 +31,37 @@ public class SwapCountVisitor implements Visitor {
 
     @Override
     public void visit(Mobile mobile) {
-        ColorCountVisitor colorLeft = new ColorCountVisitor();
-        ColorCountVisitor colorRight = new ColorCountVisitor();
-        mobile.getLeftChild().accept(colorLeft);
-        mobile.getRightChild().accept(colorRight);
         int lessRed = redLeft / 2;
         int moreRed = -Math.floorDiv(-redLeft, 2);
-        if (moreRed > colorLeft.getTotal()) {
-            d(
-                    mobile.getLeftChild(), lessRed,
-                    mobile.getRightChild(), moreRed
-            );
-        } else if (moreRed > colorRight.getTotal()) {
+        int currentWrongLeafs = wrongLeafs;
+        int wrongLeafs1;
+        int wrongLeafs2;
+        boolean leftFailed = false;
+        try {
             d(
                     mobile.getRightChild(), lessRed,
                     mobile.getLeftChild(), moreRed
             );
-        } else {
-            int currentWrongLeafs = wrongLeafs;
-            int wrongLeafs1 = Integer.MAX_VALUE;
-            try {
-                d(
-                        mobile.getRightChild(), lessRed,
-                        mobile.getLeftChild(), moreRed
-                );
-                wrongLeafs1 = wrongLeafs;
-            } catch (IllegalArgumentException ex) {
-                // do not abort here, we have to try another split below
-            }
-            wrongLeafs = currentWrongLeafs;
+            wrongLeafs1 = wrongLeafs;
+        } catch (IllegalArgumentException ex) {
+            leftFailed = true;
+            wrongLeafs1 = Integer.MAX_VALUE;
+            // do not abort here, we have to try another split below
+        }
+        wrongLeafs = currentWrongLeafs;
+        try {
             d(
                     mobile.getLeftChild(), lessRed,
                     mobile.getRightChild(), moreRed
             );
-            int wrongLeafs2 = wrongLeafs;
-            wrongLeafs = Math.min(wrongLeafs1, wrongLeafs2);
+            wrongLeafs2 = wrongLeafs;
+        } catch (IllegalArgumentException ex) {
+            wrongLeafs2 = Integer.MAX_VALUE;
+            if (leftFailed) {
+                throw ex;
+            }
         }
+        wrongLeafs = Math.min(wrongLeafs1, wrongLeafs2);
     }
 
     private void d(
