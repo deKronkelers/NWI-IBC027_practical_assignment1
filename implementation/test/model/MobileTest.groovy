@@ -60,7 +60,7 @@ class MobileTest extends GroovyTestCase {
     }
 
     void testSwaps() {
-        for (int i in 0..testMobiles.size()) {
+        for (int i in 0..<testMobiles.size()) {
             if (mobileSolutions.get(i) != "discard") {
                 println "Solving Mobile ${i + 1}"
                 Mobile mobile = new Mobile(testMobiles.get(i));
@@ -74,7 +74,7 @@ class MobileTest extends GroovyTestCase {
     }
 
     void testDiscard() {
-        for (int i in 0..testMobiles.size()) {
+        for (int i in 0..<testMobiles.size()) {
             if (mobileSolutions[i] == "discard") {
                 println "Solving Mobile ${i + 1}"
                 Mobile mobile = new Mobile(testMobiles.get(i));
