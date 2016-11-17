@@ -1,7 +1,8 @@
 package model;
 
 /**
- * @author hendrik
+ * @author Hendrik Werner // s4549775
+ * @author Constantin Blach // s4329872
  */
 public class ColorCountVisitor implements Visitor {
     private int red;
