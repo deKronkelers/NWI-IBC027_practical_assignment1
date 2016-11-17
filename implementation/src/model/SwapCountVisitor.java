@@ -35,36 +35,47 @@ public class SwapCountVisitor implements Visitor {
         ColorCountVisitor colorRight = new ColorCountVisitor();
         mobile.getLeftChild().accept(colorLeft);
         mobile.getRightChild().accept(colorRight);
-        int diff = colorLeft.getRed() - colorRight.getRed();
-        if (diff > 0) {
-            splitRed(
-                    mobile.getRightChild(), colorRight,
-                    mobile.getLeftChild(),
-                    diff
+        int lessRed = redLeft / 2;
+        int moreRed = -Math.floorDiv(-redLeft, 2);
+        if (moreRed > colorLeft.getTotal()) {
+            d(
+                    mobile.getLeftChild(), lessRed,
+                    mobile.getRightChild(), moreRed
             );
-        } else if (diff <= 0) {
-            splitRed(
-                    mobile.getLeftChild(), colorLeft,
-                    mobile.getRightChild(),
-                    diff
+        } else if (moreRed > colorRight.getTotal()) {
+            d(
+                    mobile.getRightChild(), lessRed,
+                    mobile.getLeftChild(), moreRed
             );
+        } else {
+            int currentWrongLeafs = wrongLeafs;
+            int wrongLeafs1 = Integer.MAX_VALUE;
+            try {
+                d(
+                        mobile.getRightChild(), lessRed,
+                        mobile.getLeftChild(), moreRed
+                );
+                wrongLeafs1 = wrongLeafs;
+            } catch (IllegalArgumentException ex) {
+                // do not abort here, we have to try another split below
+            }
+            wrongLeafs = currentWrongLeafs;
+            d(
+                    mobile.getLeftChild(), lessRed,
+                    mobile.getRightChild(), moreRed
+            );
+            int wrongLeafs2 = wrongLeafs;
+            wrongLeafs = Math.min(wrongLeafs1, wrongLeafs2);
         }
     }
 
-    private void splitRed(
-            MobileNode lessRedChild, ColorCountVisitor lessRed,
-            MobileNode moreRedChild,
-            int diff
+    private void d(
+            MobileNode lessRedChild, int lessRed,
+            MobileNode moreRedChild, int moreRed
     ) {
-        int absDiff = Math.abs(diff);
-        if (lessRed.getBlack() >= absDiff / 2) {
-            redLeft = absDiff / 2;
-            lessRedChild.accept(this);
-
-            redLeft = -Math.floorDiv(-absDiff, 2);
-            moreRedChild.accept(this);
-        } else {
-            throw new IllegalArgumentException("discard");
-        }
+        redLeft = lessRed;
+        lessRedChild.accept(this);
+        redLeft = moreRed;
+        moreRedChild.accept(this);
     }
 }
