@@ -1,8 +1,4 @@
-package main;
-
-import model.ColorCountVisitor;
-import model.Mobile;
-import model.SwapCountVisitor;
+package model;
 
 import java.util.Scanner;
 
