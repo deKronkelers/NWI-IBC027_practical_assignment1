@@ -35,17 +35,11 @@ public class SwapCountVisitor implements Visitor {
         int swapsRight;
         boolean leftFailed = false;
         if (lessRed == moreRed) {
-            recurse(
-                    mobile.getRightChild(), lessRed,
-                    mobile.getLeftChild(), moreRed
-            );
+            recurse(mobile.getRightChild(), lessRed, mobile.getLeftChild(), moreRed);
             return;
         }
         try {
-            recurse(
-                    mobile.getRightChild(), lessRed,
-                    mobile.getLeftChild(), moreRed
-            );
+            recurse(mobile.getRightChild(), lessRed, mobile.getLeftChild(), moreRed);
             swapsLeft = swaps;
         } catch (IllegalArgumentException ex) {
             leftFailed = true;
@@ -54,10 +48,7 @@ public class SwapCountVisitor implements Visitor {
         }
         swaps = currentSwaps;
         try {
-            recurse(
-                    mobile.getLeftChild(), lessRed,
-                    mobile.getRightChild(), moreRed
-            );
+            recurse(mobile.getLeftChild(), lessRed, mobile.getRightChild(), moreRed);
             swapsRight = swaps;
         } catch (IllegalArgumentException ex) {
             swapsRight = Integer.MAX_VALUE;
