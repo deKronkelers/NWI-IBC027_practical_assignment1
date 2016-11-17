@@ -14,7 +14,7 @@ public class Main {
         SwapCountVisitor scv = new SwapCountVisitor(ccv.getRed());
         try {
             mobile.accept(scv);
-            System.out.println(scv.getSwaps());
+            System.out.print(scv.getSwaps());
         } catch (IllegalArgumentException e) {
             System.out.print(e.getMessage());
         }
