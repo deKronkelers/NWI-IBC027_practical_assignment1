@@ -16,10 +16,6 @@ public class ColorCountVisitor implements Visitor {
         return black;
     }
 
-    public int getTotal() {
-        return red + black;
-    }
-
     @Override
     public void visit(MobileLeaf leaf) {
         switch (leaf.getColor()) {

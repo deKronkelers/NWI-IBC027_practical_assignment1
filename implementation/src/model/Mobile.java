@@ -40,16 +40,8 @@ public class Mobile implements MobileNode {
         return leftChild;
     }
 
-    public void setLeftChild(MobileNode leftChild) {
-        this.leftChild = leftChild;
-    }
-
     public MobileNode getRightChild() {
         return rightChild;
-    }
-
-    public void setRightChild(MobileNode rightChild) {
-        this.rightChild = rightChild;
     }
 
     @Override
