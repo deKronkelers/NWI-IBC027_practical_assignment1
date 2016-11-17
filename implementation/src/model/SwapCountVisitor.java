@@ -18,6 +18,9 @@ public class SwapCountVisitor implements Visitor {
 
     @Override
     public void visit(MobileLeaf leaf) {
+        if (redLeft > 1) {
+            throw new IllegalArgumentException("discard");
+        }
         if (
                 redLeft == 0 && leaf.getColor() == MobileLeaf.Color.Red
                 || redLeft == 1 && leaf.getColor() == MobileLeaf.Color.Black
