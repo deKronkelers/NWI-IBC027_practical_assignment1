@@ -34,6 +34,13 @@ public class SwapCountVisitor implements Visitor {
         int swapsLeft;
         int swapsRight;
         boolean leftFailed = false;
+        if (lessRed == moreRed) {
+            d(
+                    mobile.getRightChild(), lessRed,
+                    mobile.getLeftChild(), moreRed
+            );
+            return;
+        }
         try {
             d(
                     mobile.getRightChild(), lessRed,
