@@ -34,11 +34,37 @@ public class SwapCountVisitor implements Visitor {
         mobile.getRightChild().accept(colorRight);
         int diff = colorLeft.getRed() - colorRight.getRed();
         if (diff > 1) {
-            // left must swap to right
+            splitRed(
+                    mobile.getRightChild(), colorRight,
+                    mobile.getLeftChild(),
+                    diff
+            );
         } else if (diff < -1) {
-            // right must swap to left
+            splitRed(
+                    mobile.getLeftChild(), colorLeft,
+                    mobile.getRightChild(),
+                    diff
+            );
+        } else {
+            mobile.getLeftChild().accept(this);
+            mobile.getRightChild().accept(this);
         }
-        mobile.getLeftChild().accept(this);
-        mobile.getRightChild().accept(this);
+    }
+
+    private void splitRed(
+            MobileNode lessRedChild, ColorCountVisitor lessRed,
+            MobileNode moreRedChild,
+            int diff
+    ) {
+        int absDiff = Math.abs(diff);
+        if (lessRed.getBlack() >= absDiff / 2) {
+            redLeft = absDiff / 2;
+            lessRedChild.accept(this);
+
+            redLeft = -Math.floorDiv(-absDiff, 2);
+            moreRedChild.accept(this);
+        } else {
+            throw new IllegalArgumentException("discard");
+        }
     }
 }
