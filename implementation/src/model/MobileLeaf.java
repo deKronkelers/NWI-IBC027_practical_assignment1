@@ -15,10 +15,6 @@ public class MobileLeaf implements MobileNode {
         this.color = Color.fromChar(color);
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public Color getColor() {
         return color;
     }
