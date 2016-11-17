@@ -18,13 +18,10 @@ public class ColorCountVisitor implements Visitor {
 
     @Override
     public void visit(MobileLeaf leaf) {
-        switch (leaf.getColor()) {
-            case Black:
-                black++;
-                break;
-            case Red:
-                red++;
-                break;
+        if (leaf.getColor() == MobileLeaf.Color.Black) {
+            black++;
+        } else {
+            red++;
         }
     }
 
