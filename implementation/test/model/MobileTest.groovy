@@ -11,13 +11,12 @@ class MobileTest extends GroovyTestCase {
     static final List<String> mobileSolutions = []
 
     private static File[] getFilesEndingIn(String path, String ending) {
-        File[] files = new File(path).listFiles(new FilenameFilter() {
+        new File(path).listFiles(new FilenameFilter() {
             @Override
             boolean accept(File file, String s) {
                 s.endsWith ending
             }
-        })
-        files.sort { File f1, File f2 ->
+        }).sort { File f1, File f2 ->
             (f1.name.substring(0, f1.name.lastIndexOf(".")) as int) -
                     (f2.name.substring(0, f2.name.lastIndexOf(".")) as int)
 
