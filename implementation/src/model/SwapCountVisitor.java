@@ -30,14 +30,28 @@ public class SwapCountVisitor implements Visitor {
     public void visit(Mobile mobile) {
         int lessRed = redLeft / 2;
         int moreRed = -Math.floorDiv(-redLeft, 2);
-        int currentSwaps = swaps;
-        int swapsLeft;
-        int swapsRight;
-        boolean leftFailed = false;
         if (lessRed == moreRed) {
             recurse(mobile.getRightChild(), lessRed, mobile.getLeftChild(), moreRed);
             return;
         }
+        tryBoth(mobile, lessRed, moreRed);
+    }
+
+    private void recurse(
+            MobileNode lessRedChild, int lessRed,
+            MobileNode moreRedChild, int moreRed
+    ) {
+        redLeft = lessRed;
+        lessRedChild.accept(this);
+        redLeft = moreRed;
+        moreRedChild.accept(this);
+    }
+
+    private void tryBoth(Mobile mobile, int lessRed, int moreRed) {
+        int currentSwaps = swaps;
+        int swapsLeft;
+        int swapsRight;
+        boolean leftFailed = false;
         try {
             recurse(mobile.getRightChild(), lessRed, mobile.getLeftChild(), moreRed);
             swapsLeft = swaps;
@@ -57,15 +71,5 @@ public class SwapCountVisitor implements Visitor {
             }
         }
         swaps = Math.min(swapsLeft, swapsRight);
-    }
-
-    private void recurse(
-            MobileNode lessRedChild, int lessRed,
-            MobileNode moreRedChild, int moreRed
-    ) {
-        redLeft = lessRed;
-        lessRedChild.accept(this);
-        redLeft = moreRed;
-        moreRedChild.accept(this);
     }
 }
