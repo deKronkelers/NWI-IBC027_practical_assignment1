@@ -2,7 +2,6 @@ package model;
 
 /**
  * @author Hendrik Werner // s4549775
- * @author Constantin Blach // s4329872
  */
 public class SwapCountVisitor implements Visitor {
     private int swaps;
